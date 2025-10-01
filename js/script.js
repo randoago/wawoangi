@@ -1,14 +1,19 @@
-// Load header and footer dynamically
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("partials/header.html")
+  // Cari base path (repo name di GitHub Pages)
+  const base = window.location.pathname.split("/")[1]; 
+  const root = base ? `/${base}/` : "/";
+
+  fetch(root + "partials/header.html")
     .then(res => res.text())
     .then(data => {
       document.getElementById("header").innerHTML = data;
-    });
+    })
+    .catch(err => console.error("Gagal load header:", err));
 
-  fetch("partials/footer.html")
+  fetch(root + "partials/footer.html")
     .then(res => res.text())
     .then(data => {
       document.getElementById("footer").innerHTML = data;
-    });
+    })
+    .catch(err => console.error("Gagal load footer:", err));
 });
